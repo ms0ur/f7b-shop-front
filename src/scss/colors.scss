@@ -1,0 +1,36 @@
+
+$pink-base: #ff007f;
+$pink-hover: #d6006b;
+$pink-light: #ffebf2;
+
+:root {
+  --color-primary: #{$pink-base};
+  --color-primary-hover: #{$pink-hover};
+  
+  --bg-body: #f8f9fa;
+  --bg-surface: #ffffff;
+  --bg-input: #f1f3f5;
+  
+  --text-main: #212529;
+  --text-secondary: #6c757d;
+  --text-inverse: #ffffff;
+  
+  --border-color: #dee2e6;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+};
+
+.f7b-dark {
+  --color-primary: #ff4099; 
+  --color-primary-hover: #ff007f; 
+  
+  --bg-body: #121212;
+  --bg-surface: #1e1e1e;
+  --bg-input: #2d2d2d;
+  
+  --text-main: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-inverse: #121212;
+  
+  --border-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}

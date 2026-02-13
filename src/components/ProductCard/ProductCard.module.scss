@@ -1,0 +1,110 @@
+.productCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    max-height: 380px;
+    width: 260px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s ease;
+
+    &:hover {
+        border-color: var(--color-primary);
+    }
+
+    .imageContainer {
+        width: 100%;
+        height: 140px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    &:hover .imageContainer img {
+        transform: scale(1.05);
+    }
+
+    .headerContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+    }
+
+    .infoContainer {
+        flex-grow: 1;
+        overflow: hidden;
+
+        p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.4;
+            color: var(--text-secondary);
+            line-clamp: 3;
+            height: fit-content;
+            overflow: hidden;
+        }
+    }
+
+    .priceContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        padding-top: 8px;
+        margin-top: auto;
+
+        .addToCartBtn {
+            background: var(--color-primary);
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+
+            .icon {
+                color: #fff;
+                stroke-width: 2.5px;
+            }
+
+            &:hover {
+                background: var(--color-primary-hover);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
+}

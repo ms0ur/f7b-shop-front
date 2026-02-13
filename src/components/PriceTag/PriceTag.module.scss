@@ -1,0 +1,33 @@
+.priceTag {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1;
+
+    .actualPrice {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+        transition: color 0.2s ease;
+    }
+
+    &.priceTagSale {
+        margin-top: 14px;
+
+        .actualPrice {
+            color: var(--color-primary);
+        }
+    }
+}
+
+.oldPrice {
+    position: absolute;
+    top: -14px;
+    right: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    font-weight: 500;
+    white-space: nowrap;
+}
