@@ -1,0 +1,26 @@
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    background-color: var(--bg-surface);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.link {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    transition: scale 0.2s ease;
+
+    &.active {
+        font-weight: bold;
+    }
+
+    &:hover {
+        color: var(--color-primary);
+        text-decoration: underline;
+        scale: 1.1;
+    }
+}

@@ -8,7 +8,12 @@ const meta = preview.meta({
 
 export const Primary = meta.story({
   args: {
-    primary: true,
-    label: 'ProductCard',
+    product: {
+      id: "1",
+      name: "Тестовый товар",
+      description: "Описание товара",
+      actualPrice: 1500,
+      previousPrice: 2000,
+    }
   },
 });

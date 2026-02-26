@@ -1,0 +1,27 @@
+.catalogPage {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    h2 {
+        margin: 0;
+        font-size: 24px;
+        color: var(--text-main);
+    }
+}
+
+.productList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+}

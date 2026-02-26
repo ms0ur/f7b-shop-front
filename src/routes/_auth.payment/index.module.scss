@@ -1,0 +1,106 @@
+.paymentPage {
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.paymentCard {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    h2 {
+        margin: 0;
+        font-size: 24px;
+        color: var(--text-main);
+        text-align: center;
+    }
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg-main);
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.totalPrice {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 16px;
+}
+
+.cardForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rowInputs {
+    display: flex;
+    gap: 12px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-main);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+        color: var(--text-secondary);
+    }
+
+    &:focus {
+        border-color: var(--color-primary);
+    }
+}
+
+.payBtn {
+    background: var(--color-primary);
+    color: white;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+
+    &:hover:not(:disabled) {
+        background: var(--color-primary-hover);
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(0.98);
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+}

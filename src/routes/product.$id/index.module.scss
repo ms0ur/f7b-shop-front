@@ -1,0 +1,131 @@
+.productPage {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+.imageSection {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+}
+
+.infoSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    h2 {
+        margin: 0;
+        font-size: 28px;
+        color: var(--text-main);
+    }
+
+    .category {
+        margin: 0;
+        font-size: 14px;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 16px;
+    }
+}
+
+.actionContainer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.addToCartBtn {
+    background: var(--color-primary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+
+    &:hover {
+        background: var(--color-primary-hover);
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px;
+    height: 46px;
+    /* Approx matches addToCartBtn size */
+    box-sizing: border-box;
+
+    .qtyBtn {
+        background: var(--bg-hover);
+        border: none;
+        border-radius: 6px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-main);
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+
+    .qtyCount {
+        font-weight: 600;
+        font-size: 16px;
+        min-width: 20px;
+        text-align: center;
+        color: var(--text-main);
+    }
+}

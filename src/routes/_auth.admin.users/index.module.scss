@@ -1,0 +1,207 @@
+.adminPage {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        margin: 0;
+        font-size: 24px;
+        color: var(--text-main);
+    }
+}
+
+.addBtn {
+    background: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+
+    &:hover {
+        background: var(--color-primary-hover);
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.tableContainer {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    /* Ensures horizontal scroll on small screens */
+
+    th,
+    td {
+        padding: 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+        font-weight: 600;
+        color: var(--text-secondary);
+        font-size: 14px;
+        background-color: var(--bg-hover);
+    }
+
+    td {
+        color: var(--text-main);
+        font-size: 14px;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    tr:hover td {
+        background-color: var(--bg-hover);
+    }
+}
+
+.actionBtn {
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: var(--color-primary);
+        color: white;
+    }
+}
+
+.deleteBtn {
+    background: transparent;
+    border: 1px solid #ff4d4f;
+    color: #ff4d4f;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #ff4d4f;
+        color: white;
+    }
+}
+
+.actionsCell {
+    display: flex;
+    gap: 8px;
+}
+
+.editModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.editForm {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    h4 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--text-main);
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 14px;
+        color: var(--text-secondary);
+    }
+
+    input,
+    select {
+        padding: 10px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 14px;
+        color: var(--text-main);
+        background: var(--bg-main);
+        outline: none;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+            border-color: var(--color-primary);
+        }
+    }
+}
+
+.editActions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.saveBtn {
+    background: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background: var(--color-primary-hover);
+    }
+}
+
+.cancelBtn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: var(--text-main);
+        color: var(--text-main);
+    }
+}

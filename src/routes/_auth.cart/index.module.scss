@@ -1,0 +1,146 @@
+.cartPage {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    h2 {
+        margin: 0 0 24px 0;
+        font-size: 28px;
+        color: var(--text-main);
+    }
+}
+
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+.itemsList {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cartItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+
+    .imageBox {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .details {
+        flex-grow: 1;
+
+        h4 {
+            margin: 0 0 4px 0;
+            font-size: 16px;
+            color: var(--text-main);
+        }
+
+        p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+    }
+
+    .priceAction {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+    }
+}
+
+.removeBtn {
+    background: transparent;
+    color: #ff4d4f;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.summaryBox {
+    flex: 1;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    h3 {
+        margin: 0;
+        font-size: 20px;
+        color: var(--text-main);
+    }
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-main);
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+    margin-top: 8px;
+}
+
+.checkoutBtn {
+    background: var(--color-primary);
+    color: white;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 8px;
+
+    &:hover {
+        background: var(--color-primary-hover);
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}

@@ -11,12 +11,12 @@ export const PriceTag = ({ isSale, actualPrice, oldPrice }: PriceTagProps) => {
     return (
         <div className={clsx(styles.priceTag, isSale && styles.priceTagSale)}>
             <span className={styles.actualPrice}>
-                {actualPrice} ₽
+                {Math.round(actualPrice * 100) / 100} ₽
             </span>
 
             {isSale && oldPrice && (
                 <span className={styles.oldPrice}>
-                    {oldPrice} ₽
+                    {Math.round(oldPrice * 100) / 100} ₽
                 </span>
             )}
         </div>
