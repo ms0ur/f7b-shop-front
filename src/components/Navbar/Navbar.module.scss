@@ -11,8 +11,13 @@
 .link {
     color: var(--text-main);
     text-decoration: none;
-    transition: color 0.2s ease;
-    transition: scale 0.2s ease;
+    transition: color 0.2s ease, scale 0.2s ease;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
 
     &.active {
         font-weight: bold;

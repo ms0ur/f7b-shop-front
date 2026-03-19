@@ -4,6 +4,8 @@ import axiosInstance from "./axiosInstance";
 
 const STORAGE_KEY_USER = 'f7b_user';
 const STORAGE_KEY_CART = 'f7b_cart';
+const STORAGE_KEY_ACCESS = 'f7b_access_token';
+const STORAGE_KEY_REFRESH = 'f7b_refresh_token';
 
 class GlobalStore {
     user: User | null = null;
@@ -29,26 +31,39 @@ class GlobalStore {
         }
     }
 
-    async loginUser(login: string, password: string): Promise<boolean> {
-        return await axiosInstance.post('/users/login', { email: login, password })
-            .then(response => {
-                if (response.data == null) {
-                    throw new Error("Login response is null");
-                }
-                this.user = response.data;
-                this.cart = { id: Math.random().toString(), userId: this.user!.id, items: [] };
-                this.persist();
-                return true;
-            })
-            .catch(error => {
-                console.error(error);
-                return false;
-            });
+    async loginUser(email: string, password: string): Promise<boolean> {
+        try {
+            const { data: tokens } = await axiosInstance.post('/api/auth/login', { email, password });
+            if (!tokens) return false;
+            localStorage.setItem(STORAGE_KEY_ACCESS, tokens.accessToken);
+            localStorage.setItem(STORAGE_KEY_REFRESH, tokens.refreshToken);
+            const { data: user } = await axiosInstance.get('/api/auth/me');
+            this.user = user;
+            this.cart = { id: Math.random().toString(), userId: this.user!.id, items: [] };
+            this.persist();
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    async registerUser(name: string, email: string, password: string): Promise<{ success: boolean; error?: string }> {
+        try {
+            await axiosInstance.post('/api/auth/register', { name, email, password });
+            const ok = await this.loginUser(email, password);
+            return { success: ok };
+        } catch (err: unknown) {
+            const status = (err as { response?: { status?: number } })?.response?.status;
+            if (status === 409) return { success: false, error: 'Email уже используется' };
+            return { success: false, error: 'Ошибка при регистрации' };
+        }
     }
 
     async logoutUser(): Promise<boolean> {
         this.user = null;
         this.cart = null;
+        localStorage.removeItem(STORAGE_KEY_ACCESS);
+        localStorage.removeItem(STORAGE_KEY_REFRESH);
         this.persist();
         return true;
     }

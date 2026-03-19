@@ -5,39 +5,39 @@ import type { User } from '@/types/User.interface';
 
 export const api = {
     getProducts: async () => {
-        const { data } = await axiosInstance.get<Product[]>('/product/');
+        const { data } = await axiosInstance.get<Product[]>('/api/products/');
         return data;
     },
     getProductById: async (id: string) => {
-        const { data } = await axiosInstance.get<Product>(`/product/${id}`);
+        const { data } = await axiosInstance.get<Product>(`/api/products/${id}`);
         return data;
     },
-    createProduct: async (productData: Partial<Product>) => {
-        const { data } = await axiosInstance.post<Product>('/product/', productData);
+    createProduct: async (productData: Omit<Product, 'id'>) => {
+        const { data } = await axiosInstance.post<Product>('/api/products/', productData);
         return data;
     },
     updateProduct: async (id: string, productData: Partial<Product>) => {
-        const { data } = await axiosInstance.put<Product>(`/product/${id}`, productData);
+        const { data } = await axiosInstance.put<Product>(`/api/products/${id}`, productData);
         return data;
     },
     deleteProduct: async (id: string) => {
-        await axiosInstance.delete(`/product/${id}`);
+        await axiosInstance.delete(`/api/products/${id}`);
     },
 
     getUsers: async () => {
-        const { data } = await axiosInstance.get<User[]>('/users/');
+        const { data } = await axiosInstance.get<User[]>('/api/users/');
         return data;
     },
     getUserById: async (id: string) => {
-        const { data } = await axiosInstance.get<User>(`/users/${id}`);
+        const { data } = await axiosInstance.get<User>(`/api/users/${id}`);
         return data;
     },
     updateUser: async (id: string, userData: Partial<User>) => {
-        const { data } = await axiosInstance.put<User>(`/users/${id}`, userData);
+        const { data } = await axiosInstance.put<User>(`/api/users/${id}`, userData);
         return data;
     },
     deleteUser: async (id: string) => {
-        await axiosInstance.delete(`/users/${id}`);
+        await axiosInstance.delete(`/api/users/${id}`);
     },
 
     getOrders: async () => {

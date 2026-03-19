@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import { useState } from 'react'
 import { SearchInput } from '@/components/SearchInput'
 import { ProductCard } from '@/components/ProductCard'
@@ -8,10 +8,13 @@ import styles from './index.module.scss'
 
 export const Route = createFileRoute('/(catalog)/')({
     loader: async () => {
+        if (!store.getUser()) {
+            throw redirect({ to: '/login' })
+        }
         try {
             return await api.getProducts()
         } catch {
-            return [] // gracefully handle failure
+            return []
         }
     },
     component: CatalogPage,

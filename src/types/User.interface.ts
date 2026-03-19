@@ -3,6 +3,7 @@ export interface User {
     name: string;
     email: string;
     password?: string;
-    role: 'admin' | 'user';
+    role: 'admin' | 'user' | 'seller';
+    isBlocked?: boolean;
     orders: string[];
 }

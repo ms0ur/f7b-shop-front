@@ -114,6 +114,58 @@
     gap: 8px;
 }
 
+.statusActive {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #e6f9f0;
+    color: #1a9e5a;
+}
+
+.statusBlocked {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #fff0f0;
+    color: #ff4d4f;
+}
+
+.blockBtn {
+    background: transparent;
+    border: 1px solid #fa8c16;
+    color: #fa8c16;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #fa8c16;
+        color: white;
+    }
+}
+
+.unblockBtn {
+    background: transparent;
+    border: 1px solid #1a9e5a;
+    color: #1a9e5a;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #1a9e5a;
+        color: white;
+    }
+}
+
 .editModal {
     position: fixed;
     top: 0;

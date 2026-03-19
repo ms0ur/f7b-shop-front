@@ -3,11 +3,12 @@ import { useState } from 'react'
 import store from '@/utils/store'
 import styles from './index.module.scss'
 
-export const Route = createFileRoute('/login/')({
+export const Route = createFileRoute('/register/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -20,14 +21,14 @@ function RouteComponent() {
     setIsLoading(true)
 
     try {
-      const success = await store.loginUser(email, password)
-      if (success) {
+      const result = await store.registerUser(name, email, password)
+      if (result.success) {
         navigate({ to: '/' })
       } else {
-        setError('Неверный email или пароль')
+        setError(result.error ?? 'Ошибка при регистрации')
       }
     } catch {
-      setError('Произошла ошибка при входе')
+      setError('Произошла ошибка при регистрации')
     } finally {
       setIsLoading(false)
     }
@@ -36,10 +37,23 @@ function RouteComponent() {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginCard}>
-        <h1 className={styles.title}>Вход</h1>
-        <p className={styles.subtitle}>Войдите в свой аккаунт, чтобы продолжить покупки</p>
+        <h1 className={styles.title}>Регистрация</h1>
+        <p className={styles.subtitle}>Создайте аккаунт, чтобы начать покупки</p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.inputGroup}>
+            <label className={styles.label} htmlFor="name">Имя</label>
+            <input
+              id="name"
+              type="text"
+              className={styles.input}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Введите ваше имя"
+              required
+            />
+          </div>
+
           <div className={styles.inputGroup}>
             <label className={styles.label} htmlFor="email">Email</label>
             <input
@@ -73,13 +87,13 @@ function RouteComponent() {
             className={styles.submitButton}
             disabled={isLoading}
           >
-            {isLoading ? 'Загрузка...' : 'Войти'}
+            {isLoading ? 'Загрузка...' : 'Зарегистрироваться'}
           </button>
         </form>
 
         <p className={styles.switchLink}>
-          Нет аккаунта?{' '}
-          <Link to="/register" className={styles.switchAnchor}>Зарегистрироваться</Link>
+          Уже есть аккаунт?{' '}
+          <Link to="/login" className={styles.switchAnchor}>Войти</Link>
         </p>
       </div>
     </div>

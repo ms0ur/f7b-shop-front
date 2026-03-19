@@ -20,7 +20,7 @@ function AdminUsers() {
   const loaderUsers = Route.useLoaderData()
   const [users, setUsers] = useState<User[]>(loaderUsers)
   const [editingUser, setEditingUser] = useState<User | null>(null)
-  const [formData, setFormData] = useState({ name: '', email: '', role: 'user' as 'admin' | 'user' })
+  const [formData, setFormData] = useState({ name: '', email: '', role: 'user' as User['role'] })
 
   const handleEdit = (user: User) => {
     setEditingUser(user)
@@ -33,6 +33,16 @@ function AdminUsers() {
       await api.updateUser(editingUser.id, formData)
       setUsers(prev => prev.map(u => u.id === editingUser.id ? { ...u, ...formData } : u))
       setEditingUser(null)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const handleToggleBlock = async (user: User) => {
+    const newBlocked = !user.isBlocked
+    try {
+      await api.updateUser(user.id, { isBlocked: newBlocked } as Partial<User>)
+      setUsers(prev => prev.map(u => u.id === user.id ? { ...u, isBlocked: newBlocked } : u))
     } catch (e) {
       console.error(e)
     }
@@ -68,8 +78,9 @@ function AdminUsers() {
             </label>
             <label>
               Роль
-              <select value={formData.role} onChange={e => setFormData(p => ({ ...p, role: e.target.value as 'admin' | 'user' }))}>
+              <select value={formData.role} onChange={e => setFormData(p => ({ ...p, role: e.target.value as User['role'] }))}>
                 <option value="user">user</option>
+                <option value="seller">seller</option>
                 <option value="admin">admin</option>
               </select>
             </label>
@@ -89,6 +100,7 @@ function AdminUsers() {
               <th>Имя</th>
               <th>Email</th>
               <th>Роль</th>
+              <th>Статус</th>
               <th>Действия</th>
             </tr>
           </thead>
@@ -100,8 +112,19 @@ function AdminUsers() {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
+                  <span className={user.isBlocked ? styles.statusBlocked : styles.statusActive}>
+                    {user.isBlocked ? 'Заблокирован' : 'Активен'}
+                  </span>
+                </td>
+                <td>
                   <div className={styles.actionsCell}>
                     <button className={styles.actionBtn} onClick={() => handleEdit(user)}>Ред.</button>
+                    <button
+                      className={user.isBlocked ? styles.unblockBtn : styles.blockBtn}
+                      onClick={() => handleToggleBlock(user)}
+                    >
+                      {user.isBlocked ? 'Разблок.' : 'Блок.'}
+                    </button>
                     <button className={styles.deleteBtn} onClick={() => handleDelete(user.id)}>Удалить</button>
                   </div>
                 </td>
@@ -109,7 +132,7 @@ function AdminUsers() {
             ))}
             {users.length === 0 && (
               <tr>
-                <td colSpan={5} style={{ textAlign: 'center' }}>Пользователи не найдены</td>
+                <td colSpan={6} style={{ textAlign: 'center' }}>Пользователи не найдены</td>
               </tr>
             )}
           </tbody>

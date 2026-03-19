@@ -1,7 +1,14 @@
-import { createFileRoute, Outlet, Link } from '@tanstack/react-router'
+import { createFileRoute, Outlet, Link, redirect } from '@tanstack/react-router'
 import styles from '@/components/Navbar/Navbar.module.scss'
+import store from '@/utils/store'
 
 export const Route = createFileRoute('/_auth/admin')({
+  beforeLoad: () => {
+    const user = store.getUser();
+    if (!user || user.role !== 'admin') {
+      throw redirect({ to: '/' })
+    }
+  },
   component: AdminLayout,
 })
 

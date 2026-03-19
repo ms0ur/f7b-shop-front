@@ -16,13 +16,17 @@ export const Route = createFileRoute('/_auth/admin/products/')({
   component: AdminProducts,
 })
 
+const emptyForm = { name: '', description: '', actualPrice: 0, previousPrice: 0, img: '' };
+
 function AdminProducts() {
   const loaderProducts = Route.useLoaderData()
   const [products, setProducts] = useState<Product[]>(loaderProducts)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
-  const [formData, setFormData] = useState({ name: '', description: '', actualPrice: 0, previousPrice: 0, img: '' })
+  const [isCreating, setIsCreating] = useState(false)
+  const [formData, setFormData] = useState(emptyForm)
 
   const handleEdit = (product: Product) => {
+    setIsCreating(false)
     setEditingProduct(product)
     setFormData({
       name: product.name,
@@ -33,12 +37,23 @@ function AdminProducts() {
     })
   }
 
+  const handleCreate = () => {
+    setEditingProduct(null)
+    setIsCreating(true)
+    setFormData(emptyForm)
+  }
+
   const handleSave = async () => {
-    if (!editingProduct) return
     try {
-      await api.updateProduct(editingProduct.id, formData)
-      setProducts(prev => prev.map(p => p.id === editingProduct.id ? { ...p, ...formData } : p))
-      setEditingProduct(null)
+      if (isCreating) {
+        const created = await api.createProduct(formData)
+        setProducts(prev => [...prev, created])
+        setIsCreating(false)
+      } else if (editingProduct) {
+        await api.updateProduct(editingProduct.id, formData)
+        setProducts(prev => prev.map(p => p.id === editingProduct.id ? { ...p, ...formData } : p))
+        setEditingProduct(null)
+      }
     } catch (e) {
       console.error(e)
     }
@@ -54,16 +69,19 @@ function AdminProducts() {
     }
   }
 
+  const isModalOpen = isCreating || editingProduct !== null
+
   return (
     <div className={styles.adminPage}>
       <div className={styles.header}>
         <h3>Управление товарами</h3>
+        <button className={styles.addBtn} onClick={handleCreate}>+ Добавить товар</button>
       </div>
 
-      {editingProduct && (
+      {isModalOpen && (
         <div className={styles.editModal}>
           <div className={styles.editForm}>
-            <h4>Редактирование товара</h4>
+            <h4>{isCreating ? 'Новый товар' : 'Редактирование товара'}</h4>
             <label>
               Название
               <input value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))} />
@@ -86,7 +104,7 @@ function AdminProducts() {
             </label>
             <div className={styles.editActions}>
               <button className={styles.saveBtn} onClick={handleSave}>Сохранить</button>
-              <button className={styles.cancelBtn} onClick={() => setEditingProduct(null)}>Отмена</button>
+              <button className={styles.cancelBtn} onClick={() => { setEditingProduct(null); setIsCreating(false) }}>Отмена</button>
             </div>
           </div>
         </div>
